@@ -11,18 +11,36 @@ type Product {
     title:String!
     thumbnail:String!
     price:Float
+    category:Category
+}
+
+type Category{
+    id: Int!
+    title:String!
 }
 
 type Query {
     product:Product
     products(limit: Int):[Product]
+    categories:[Category]
 }
+
+
 
 `
 
+const mocks = {
+    Int:() => Math.floor(Math.random()*99)+1,
+    Float:() => (Math.random()*99.0 + 1.0).toFixed(2),
+    Product:() => ({
+        thumbnail:() => `https://picsum.photos/400/400`
+    })
+
+
+}
 
 const executableSchema = addMocksToSchema({
-    schema: makeExecutableSchema({typeDefs,}),
+    schema: makeExecutableSchema({typeDefs,}),mocks
 });
 
 function runMiddleware(req,res,fn){
