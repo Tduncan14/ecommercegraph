@@ -1,6 +1,7 @@
 import {graphqlHTTP} from 'express-graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import {addMocksToSchema} from '@graphql-tools/mock';
+import {loginUser,isTokenValid} from '../../../utils/authentication'
 
 
 let cart = {
@@ -52,8 +53,8 @@ type Query {
 
 type Mutation {
     addToCart(productId: Int!):Cart
-    loginUser(username:String!,password:String!)
-    User
+    loginUser(username:String!,password:String!):User
+    
 }
 
 `
@@ -67,6 +68,10 @@ const resolvers = {
     },
 
     Mutation:{
+
+
+
+
         addToCart:(_,{productId}) => {
 
             cart ={
