@@ -3,6 +3,8 @@ import SubHeader from '../../components/SubHeader';
 import { useQuery ,gql} from '@apollo/client';
 import ProductItem from '../../components/ProductItem';
 
+
+
 const ProductItemsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -32,7 +34,6 @@ function Products() {
 
 
 
-
   return (
     <>
       <SubHeader title='Available products' goToCart />
@@ -43,7 +44,7 @@ function Products() {
           
       <ProductItemsWrapper>
         {data && data.products && data.products.map((product) =>(
-          <ProductItem key={product.id} data={product}  />
+          <ProductItem key={product.id} data={product} addToCart  />
         ))}
 
       </ProductItemsWrapper>
